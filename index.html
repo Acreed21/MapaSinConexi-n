@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+    <style type="text/css">
+      #map {
+        height: 900px;
+        width: 100%;
+      }
+    </style>
+    <script>var map;
+        function initMap() {
+          const uluru = { lat: 5.202675, lng: -74.192154 };
+            map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 10,
+            center: uluru,
+          });
+        }
+    </script>
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: column; align-items: center; position: relative">
+        <p style= "font-family: Arial; font-size: 40px;">SELECCIONE UN CIRCUITO</p>
+        <select name="ubicacion" id="ubicacion" style= "font-family: Arial; font-size: 20px; margin: 5px; padding: 5px; width: 40%;">
+            <option value="value1"selected>SELECCIONE UN CIRCUITO...</option>
+            <option value="0">CAMPAMENTO--VG13D</option>
+            <option value="1">CERINSA--LD11D</option>
+            <option value="2">GUANACAS--PE13D</option>
+            <option value="3">GUAYABAL--PE11D</option>
+            <option value="4">HATILLO--FE21D</option>
+            <option value="5">LAS_LAJAS--FE11D</option>
+            <option value="6">LAS_PILAS--FE12D</option>
+            <option value="7">LLANO_HDA--FE13D</option>
+            <option value="8">NARANJAL--TR11D</option>
+            <option value="9">PACHO4--ES11R4</option>
+            <option value="10">PACHO8--ES11R8</option>
+            <option value="11">PAIME--VG12D</option>
+            <option value="12">PARAMOALTO--PA11D</option>
+            <option value="13">PASUNCHA--VG11D</option>
+            <option value="14">PTE_OLGUIN--LD12D</option>
+            <option value="15">SUPATA--FC13D</option>
+            <option value="16">TOPAIPI--LM22D</option>
+        </select>
+    </div>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHKLehAhHBg-sYodNo1sUFgRw2HrItySw&callback=initMap&libraries=&v=weekly"
+    ></script>
+  </body>
+<script>
+    var coordenadas = [
+[[5.224844335882352, -74.19123823235293], [5.187603912389384, -74.22294135504421], [5.17490769168831, -74.14582617344153]] ,
+[[5.187603912389384, -74.22294135504421], [5.143656259115043, -74.23415263672565], [5.17490769168831, -74.14582617344153]] ,
+[[5.2261166325, -74.31385589749999], [5.17490769168831, -74.14582617344153], [5.187603912389384, -74.22294135504421]] ,
+[[5.17490769168831, -74.14582617344153], [5.187603912389384, -74.22294135504421], [5.143656259115043, -74.23415263672565]] ,
+[[5.187603912389384, -74.22294135504421], [5.143656259115043, -74.23415263672565], [5.17490769168831, -74.14582617344153]] ,
+[[5.142532230540542, -74.16863373081082], [5.143656259115043, -74.23415263672565], [5.17490769168831, -74.14582617344153]] ,
+[[5.12525116060606, -74.15951220560602], [5.187603912389384, -74.22294135504421], [5.17490769168831, -74.14582617344153]] ,
+[[5.187603912389384, -74.22294135504421], [5.143656259115043, -74.23415263672565], [5.17490769168831, -74.14582617344153]] ,
+[[5.08957962, -74.41117431], [5.143656259115043, -74.23415263672565], [5.187603912389384, -74.22294135504421]] ,
+[[5.17490769168831, -74.14582617344153], [5.12525116060606, -74.15951220560602], [5.143656259115043, -74.23415263672565]] ,
+[[5.12525116060606, -74.15951220560602], [5.142532230540542, -74.16863373081082], [5.143656259115043, -74.23415263672565]] ,
+[[5.12525116060606, -74.15951220560602], [5.305250123333334, -74.18429307666666], [5.365893624074075, -74.17730234111112]] ,
+[[5.12525116060606, -74.15951220560602], [5.305250123333334, -74.18429307666666], [5.365893624074075, -74.17730234111112]] ,
+[[5.2579804957142855, -74.22637535928573], [5.143656259115043, -74.23415263672565], [5.187603912389384, -74.22294135504421]] ,
+[[5.17490769168831, -74.14582617344153], [5.143656259115043, -74.23415263672565], [5.187603912389384, -74.22294135504421]] ,
+[[5.187603912389384, -74.22294135504421], [5.17490769168831, -74.14582617344153], [5.143656259115043, -74.23415263672565]] ,
+[[5.39171692, -74.312634], [5.2579804957142855, -74.22637535928573]] ,
+]
+    var select = document.getElementById('ubicacion');
+    var marker1 = new google.maps.Marker({
+        map: map,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+        }
+    });
+    var marker2 = new google.maps.Marker({
+        map: map,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+        }
+    });
+    var marker3 = new google.maps.Marker({
+        map: map,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+        }
+    });
+    select.addEventListener('change',
+      function(){
+        var selectedOption = this.options[select.selectedIndex];
+        if(coordenadas[selectedOption.value].length==3){
+            marker3.setMap(map)
+            marker2.setMap(map)
+            var latlng1 = new google.maps.LatLng(coordenadas[selectedOption.value][0][0], coordenadas[selectedOption.value][0][1])
+            marker1.setPosition(latlng1)
+            var latlng2 = new google.maps.LatLng(coordenadas[selectedOption.value][1][0], coordenadas[selectedOption.value][1][1])
+            marker2.setPosition(latlng2)
+            var latlng3 = new google.maps.LatLng(coordenadas[selectedOption.value][2][0], coordenadas[selectedOption.value][2][1])
+            marker3.setPosition(latlng3)
+        }else if(coordenadas[selectedOption.value].length==2){
+            marker3.setMap(null)
+            marker2.setMap(map)
+            var latlng1 = new google.maps.LatLng(coordenadas[selectedOption.value][0][0], coordenadas[selectedOption.value][0][1])
+            marker1.setPosition(latlng1)
+            var latlng2 = new google.maps.LatLng(coordenadas[selectedOption.value][1][0], coordenadas[selectedOption.value][1][1])
+            marker2.setPosition(latlng2)
+        }else if(coordenadas[selectedOption.value].length==1){
+            marker3.setMap(null)
+            marker2.setMap(null)
+            var latlng1 = new google.maps.LatLng(coordenadas[selectedOption.value][0][0], coordenadas[selectedOption.value][0][1])
+            marker1.setPosition(latlng1)
+        }
+    });
+</script>
+</html>
